@@ -6,7 +6,7 @@ const contador = document.querySelector("#contador");
 let cliques = 0;
 
 // 3. fica de olho no botão: QUANDO alguém clicar, roda esta função
-botao.addEventListener("dblclick", function () {
+botao.addEventListener("mouseover", function () {
   cliques = cliques + 1;
   contador.textContent = "Você clicou " + cliques + " vez(es).";
 });
