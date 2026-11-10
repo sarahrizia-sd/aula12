@@ -3,8 +3,9 @@ const botao = document.querySelector("#botao");
 const contador = document.querySelector("#contador");
 
 // 2. uma variável para contar os cliques
+let cliques = 0;
+
 function contarClique() {
-  let cliques = 0;
   cliques++;
   console.log(cliques);
 }
