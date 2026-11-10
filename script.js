@@ -3,7 +3,11 @@ const botao = document.querySelector("#botao");
 const contador = document.querySelector("#contador");
 
 // 2. uma variável para contar os cliques
-let cliques = 0;
+function contarClique() {
+  let cliques = 0;
+  cliques++;
+  console.log(cliques);
+}
 
 // 3. fica de olho no botão: QUANDO alguém clicar, roda esta função
 botao.addEventListener("mouseover", function () {
