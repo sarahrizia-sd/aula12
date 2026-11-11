@@ -1,6 +1,6 @@
 const turma = [
-  { nome: "Sarah Silva", media: 8.5 },
-  { nome: "Rizia Domingos", media: 5.2 }
+  { nome: "Ana Souza", media: 8.5 },
+  { nome: "Bruno Lima", media: 5.2 }
 ];
 
 const tabela = document.querySelector("#tabela");
@@ -8,6 +8,27 @@ const quadro = document.querySelector("#quadro");
 const vazio = document.querySelector("#vazio");
 const form = document.querySelector("#form-aluno");
 const aviso = document.querySelector("#aviso");
+
+const busca = document.querySelector("#busca");
+
+// QUANDO o usuário digitar no campo de busca (a cada letra)
+busca.addEventListener("input", function () {
+  // em minúsculas, para "ana" achar "Ana"
+  const termo = busca.value.toLowerCase();
+
+  // filter: só os alunos cujo nome tem o termo
+  const achados = turma.filter(function (aluno) {
+    return aluno.nome.toLowerCase().includes(termo);
+  });
+
+  // a tabela mostra só os achados
+  mostrarTurma(achados);
+  if (achados.length === 0) {
+    vazio.textContent = "Nenhum aluno com \"" + busca.value + "\".";
+  } else {
+    vazio.textContent = "Nenhum aluno cadastrado.";
+  }
+});
 
 // cria uma célula com o texto
 function criarCelula(texto) {
