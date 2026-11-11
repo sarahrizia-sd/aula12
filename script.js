@@ -1,6 +1,6 @@
 const turma = [
-  { nome: "Ana Souza", media: 8.5 },
-  { nome: "Bruno Lima", media: 5.2 }
+  { nome: "Sarah Silva", media: 8.5 },
+  { nome: "Rizia Domingos", media: 5.2 }
 ];
 
 const tabela = document.querySelector("#tabela");
@@ -45,17 +45,50 @@ function mostrarTurma(lista) {
   }
 }
 
-// QUANDO o formulário for enviado (clique no botão OU Enter num campo)
 form.addEventListener("submit", function (event) {
-  // 1. não deixa o navegador recarregar a página
   event.preventDefault();
 
-  // 2. lê o que foi digitado: form.nome é o campo com name="nome"
-  const nome = form.nome.value;
-  const nota = form.nota.value;
+  const nome = form.nome.value.trim();
+  const nota = Number(form.nota.value);
 
-  // 3. por enquanto, só mostra o que chegou
-  aviso.textContent = "Recebi: " + nome + ", nota " + nota;
+  form.nome.classList.remove("campo-erro");
+  form.nota.classList.remove("campo-erro");
+  aviso.classList.remove("erro");
+
+  if (nome === "") {
+    form.nome.classList.add("campo-erro");
+    aviso.classList.add("erro");
+    aviso.textContent = "Escreva o nome do aluno.";
+    form.nome.focus();
+    return;
+  }
+
+  if (nome.length < 3) {
+    form.nome.classList.add("campo-erro");
+    aviso.classList.add("erro");
+    aviso.textContent = "O nome precisa ter pelo menos 3 letras.";
+    form.nome.focus();
+    return;
+  }
+
+  if (form.nota.value === "" || nota < 0 || nota > 10) {
+    form.nota.classList.add("campo-erro");
+    aviso.classList.add("erro");
+    aviso.textContent = "A nota tem que ser de 0 a 10.";
+    form.nota.focus();
+    return;
+  }
+
+  // 1. monta o objeto do aluno e coloca no fim da lista
+  turma.push({ nome: nome, media: nota });
+
+  // 2. desenha a tabela de novo, agora com o aluno novo
+  mostrarTurma(turma);
+
+  // 3. avisa, limpa o formulário e volta o cursor para o nome
+  aviso.textContent = nome + " cadastrado(a)!";
+  form.reset();
+  form.nome.focus();
 });
 
 mostrarTurma(turma);
